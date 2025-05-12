@@ -1,4 +1,4 @@
-package com.giuliofinocchiaro.listup.data.login;
+package com.giuliofinocchiaro.listup.ui.login;
 
 /**
  * Class exposing authenticated user details to the UI.

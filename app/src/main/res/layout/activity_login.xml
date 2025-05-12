@@ -109,16 +109,6 @@
 
     </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="36dp"
-        android:layout_height="83dp"
-        android:layout_marginBottom="472dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="149dp" />
-
     <!-- Recupero Account -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

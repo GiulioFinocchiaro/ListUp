@@ -1,4 +1,4 @@
-package com.giuliofinocchiaro.listup.data.login;
+package com.giuliofinocchiaro.listup.ui.login;
 
 import android.app.Application;
 
@@ -6,11 +6,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.giuliofinocchiaro.mygiancarlobarmenuapplicationvera.R;
-import com.giuliofinocchiaro.mygiancarlobarmenuapplicationvera.data.Result;
-import com.giuliofinocchiaro.mygiancarlobarmenuapplicationvera.data.model.LoggedInUser;
-import com.giuliofinocchiaro.mygiancarlobarmenuapplicationvera.data.repository.LoginRepository;
-import com.giuliofinocchiaro.mygiancarlobarmenuapplicationvera.data.source.LoginDataSource;
+import com.giuliofinocchiaro.listup.R;
+import com.giuliofinocchiaro.listup.data.Result;
+import com.giuliofinocchiaro.listup.data.model.LoggedInUser;
+import com.giuliofinocchiaro.listup.data.repository.LoginRepository;
+import com.giuliofinocchiaro.listup.data.source.LoginDataSource;
 
 public class LoginViewModel extends ViewModel {
 

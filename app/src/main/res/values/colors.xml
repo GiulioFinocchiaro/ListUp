@@ -1,5 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="forest_green">#228B22</color> <!-- Verde Bosco -->
+    <color name="mint_green">#98FF98</color> <!-- Verde Menta -->
+    <color name="sage_green">#9DC183</color> <!-- Verde Salvia -->
+    <color name="aquamarine">#7FFFD4</color> <!-- Verde Acqua -->
+    <color name="light_olive">#B5B35C</color> <!-- Verde Oliva Chiaro -->
+    <color name="neutral_cream">#F5F5DC</color> <!-- Crema Neutro -->
+
+    <!-- Tema principale -->
+    <color name="primary">#228B22</color> <!-- Forest Green -->
+    <color name="primary_variant">#9DC183</color> <!-- Sage Green -->
+    <color name="secondary">#7FFFD4</color> <!-- Aquamarine -->
+    <color name="background">#F5F5DC</color> <!-- Neutral Cream -->
+    <color name="surface">#98FF98</color> <!-- Mint Green -->
+    <color name="on_primary">#FFFFFF</color>
+    <color name="on_secondary">#000000</color>
+    <color name="on_background">#228B22</color> <!-- Forest Green -->
+    <color name="on_surface">#556B2F</color> <!-- Dark Olive (aggiunto per contrasto) -->
+    <color name="white">#FFFFFF</color>
+
+    <color name="button">#006400</color> <!-- Dark Green -->
+    <color name="button_text">#FFFFFF</color>
+
+    <color name="red">#FF0000</color>
 </resources>

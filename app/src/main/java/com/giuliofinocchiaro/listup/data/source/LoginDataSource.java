@@ -4,9 +4,9 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
-import com.giuliofinocchiaro.mygiancarlobarmenuapplicationvera.ui.Constants;
-import com.giuliofinocchiaro.mygiancarlobarmenuapplicationvera.data.Result;
-import com.giuliofinocchiaro.mygiancarlobarmenuapplicationvera.data.model.LoggedInUser;
+import com.giuliofinocchiaro.listup.data.Constants;
+import com.giuliofinocchiaro.listup.data.Result;
+import com.giuliofinocchiaro.listup.data.model.LoggedInUser;
 
 import org.json.JSONObject;
 

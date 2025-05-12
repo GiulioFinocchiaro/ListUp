@@ -1,4 +1,4 @@
-package com.giuliofinocchiaro.listup.data.login;
+package com.giuliofinocchiaro.listup.ui.login;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,7 +9,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,31 +18,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.giuliofinocchiaro.mygiancarlobarmenuapplicationvera.ui.home.HomeActivity;
-import com.giuliofinocchiaro.mygiancarlobarmenuapplicationvera.R;
-import com.giuliofinocchiaro.mygiancarlobarmenuapplicationvera.databinding.ActivityLoginBinding;
-import com.giuliofinocchiaro.mygiancarlobarmenuapplicationvera.ui.register.RegisterActivity;
+import com.giuliofinocchiaro.listup.R;
+import com.giuliofinocchiaro.listup.ui.home.HomeActivity;
+import com.giuliofinocchiaro.listup.ui.register.RegisterActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class LoginActivity extends AppCompatActivity {
     private LoginViewModel loginViewModel;
-    private ActivityLoginBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-     binding = ActivityLoginBinding.inflate(getLayoutInflater());
-     setContentView(binding.getRoot());
-
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory(getApplication()))
                 .get(LoginViewModel.class);
 
-        final TextInputEditText usernameEditText = (TextInputEditText) binding.username;
-        final TextInputEditText passwordEditText = (TextInputEditText) binding.password;
-        final Button loginButton = binding.login;
-        final ProgressBar loadingProgressBar = binding.progressBar;
-        final Button registerButton = binding.loginRegisterButton;
+        final TextInputEditText usernameEditText = findViewById(R.id.username);
+        final TextInputEditText passwordEditText = findViewById(R.id.password);
+        final Button loginButton = findViewById(R.id.login);
+        final Button registerButton = findViewById(R.id.loginRegisterButton);
 
         if (loginViewModel.isLoggedIn()) {
             Intent act = new Intent(LoginActivity.this, HomeActivity.class);
@@ -74,7 +67,6 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginResult == null) {
                     return;
                 }
-                loadingProgressBar.setVisibility(View.GONE);
                 if (loginResult.getError() != null) {
                     showLoginFailed(loginResult.getError());
                 }
@@ -121,7 +113,6 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
             }

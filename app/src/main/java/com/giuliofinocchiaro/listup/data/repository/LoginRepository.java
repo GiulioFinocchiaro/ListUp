@@ -3,10 +3,10 @@ package com.giuliofinocchiaro.listup.data.repository;
 import android.content.SharedPreferences;
 import android.content.Context;
 
-import com.giuliofinocchiaro.mygiancarlobarmenuapplicationvera.ui.Constants;
-import com.giuliofinocchiaro.mygiancarlobarmenuapplicationvera.data.Result;
-import com.giuliofinocchiaro.mygiancarlobarmenuapplicationvera.data.model.LoggedInUser;
-import com.giuliofinocchiaro.mygiancarlobarmenuapplicationvera.data.source.LoginDataSource;
+import com.giuliofinocchiaro.listup.data.Constants;
+import com.giuliofinocchiaro.listup.data.Result;
+import com.giuliofinocchiaro.listup.data.model.LoggedInUser;
+import com.giuliofinocchiaro.listup.data.source.LoginDataSource;
 
 /**
  * Classe che gestisce l'autenticazione dell'utente e il salvataggio dei dati di sessione.
@@ -17,14 +17,12 @@ public class LoginRepository {
     private final LoginDataSource dataSource;
     private LoggedInUser user = null;
     private final SharedPreferences sharedPreferences;
-    private final Context context;
 
     /**
      * Costruttore privato per garantire il singleton.
      */
     private LoginRepository(LoginDataSource dataSource, Context context) {
         this.dataSource = dataSource;
-        this.context = context;
         this.sharedPreferences = context.getSharedPreferences(Constants.PREFS_NAME_LOGIN, Context.MODE_PRIVATE);
         loadUserFromPreferences();
     }
@@ -55,9 +53,6 @@ public class LoginRepository {
      */
     public void logout() {
         user = null;
-        sharedPreferences.edit().clear().apply();
-        SharedPreferences sh = this.context.getSharedPreferences(Constants.PREFS_NAME_CART, Context.MODE_PRIVATE);
-        sh.edit().clear().apply();
         dataSource.logout();
     }
 
@@ -68,8 +63,7 @@ public class LoginRepository {
         dataSource.login(username, password, new LoginDataSource.LoginCallback() {
             @Override
             public void onSuccess(Result.Success<LoggedInUser> result) {
-                LoggedInUser iloggedInUser = result.getData();
-                user = iloggedInUser;
+                user = result.getData();
                 saveUserToPreferences(user);
                 callback.onSuccess(result);
             }

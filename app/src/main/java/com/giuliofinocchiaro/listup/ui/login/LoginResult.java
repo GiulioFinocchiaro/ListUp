@@ -1,4 +1,4 @@
-package com.giuliofinocchiaro.listup.data.login;
+package com.giuliofinocchiaro.listup.ui.login;
 
 import androidx.annotation.Nullable;
 
