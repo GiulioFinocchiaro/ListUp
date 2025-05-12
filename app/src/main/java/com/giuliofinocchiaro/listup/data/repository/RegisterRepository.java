@@ -1,6 +1,6 @@
 package com.giuliofinocchiaro.listup.data.repository;
 
-import com.giuliofinocchiaro.mygiancarlobarmenuapplicationvera.data.source.RegisterDataSource;
+import com.giuliofinocchiaro.listup.data.source.RegisterDataSource;
 
 public class RegisterRepository {
     private final RegisterDataSource dataSource;

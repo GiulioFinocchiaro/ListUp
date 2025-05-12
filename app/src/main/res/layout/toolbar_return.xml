@@ -23,8 +23,8 @@
         <ImageView
             android:id="@+id/toolbar_back"
             android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/icons8_back_100" />
+            android:layout_height="24dp"/>
+            <!-- android:src="@drawable/icons8_back_100" /> !-->
 
         <TextView
             android:id="@+id/toolbar_titleAc"
