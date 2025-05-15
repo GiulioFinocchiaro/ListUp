@@ -10,13 +10,12 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import javax.net.ssl.HttpsURLConnection;
 
 public class RegisterDataSource {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -25,7 +24,7 @@ public class RegisterDataSource {
         executor.execute(() -> {
             try {
                 URL url = new URL(Constants.urlAPI + "auth/register.php");
-                HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setRequestProperty("Content-Type", "application/json");
                 conn.setDoOutput(true);

@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.giuliofinocchiaro.listup.R;
 import com.giuliofinocchiaro.listup.data.Result;
-import com.giuliofinocchiaro.listup.data.model.LoggedInUser;
+import com.giuliofinocchiaro.listup.data.model.User;
 import com.giuliofinocchiaro.listup.data.repository.LoginRepository;
 import com.giuliofinocchiaro.listup.data.source.LoginDataSource;
 
@@ -32,12 +32,12 @@ public class LoginViewModel extends ViewModel {
 
     public void login(String username, String password) {
         // can be launched in a separate asynchronous job
-        //Result<LoggedInUser> result = loginRepository.login(username, password);
+        //Result<User> result = loginRepository.login(username, password);
         loginRepository.login(username, password, new LoginRepository.LoginCallback() {
             @Override
-            public void onSuccess(Result.Success<LoggedInUser> result) {
-                LoggedInUser data = result.getData();
-                loginResult.postValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
+            public void onSuccess(Result.Success<User> result) {
+                User data = result.getData();
+                loginResult.postValue(new LoginResult(new LoggedInUserView(data.getUsername())));
             }
 
             @Override

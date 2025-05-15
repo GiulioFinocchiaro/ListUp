@@ -5,7 +5,7 @@ import android.content.Context;
 
 import com.giuliofinocchiaro.listup.data.Constants;
 import com.giuliofinocchiaro.listup.data.Result;
-import com.giuliofinocchiaro.listup.data.model.LoggedInUser;
+import com.giuliofinocchiaro.listup.data.model.User;
 import com.giuliofinocchiaro.listup.data.source.LoginDataSource;
 
 /**
@@ -15,7 +15,7 @@ public class LoginRepository {
 
     private static volatile LoginRepository instance;
     private final LoginDataSource dataSource;
-    private LoggedInUser user = null;
+    private User user = null;
     private final SharedPreferences sharedPreferences;
 
     /**
@@ -24,7 +24,7 @@ public class LoginRepository {
     private LoginRepository(LoginDataSource dataSource, Context context) {
         this.dataSource = dataSource;
         this.sharedPreferences = context.getSharedPreferences(Constants.PREFS_NAME_LOGIN, Context.MODE_PRIVATE);
-        loadUserFromPreferences();
+        //loadUserFromPreferences();
     }
 
     /**
@@ -37,7 +37,7 @@ public class LoginRepository {
         return instance;
     }
 
-    public LoggedInUser getUser() {
+    public User getUser() {
         return user;
     }
 
@@ -62,7 +62,7 @@ public class LoginRepository {
     public void login(String username, String password, LoginCallback callback) {
         dataSource.login(username, password, new LoginDataSource.LoginCallback() {
             @Override
-            public void onSuccess(Result.Success<LoggedInUser> result) {
+            public void onSuccess(Result.Success<User> result) {
                 user = result.getData();
                 saveUserToPreferences(user);
                 callback.onSuccess(result);
@@ -80,29 +80,30 @@ public class LoginRepository {
     /**
      * Salva l'utente nelle SharedPreferences.
      */
-    private void saveUserToPreferences(LoggedInUser user) {
+    private void saveUserToPreferences(User user) {
         sharedPreferences.edit()
                 .putInt(Constants.KEY_USER_ID, user.getUserId())
-                .putString(Constants.KEY_USER_NAME, user.getDisplayName())
+                .putString(Constants.KEY_USER_NAME, user.getUsername())
                 .apply();
     }
 
     /**
      * Carica i dati dell'utente loggato dalle SharedPreferences.
      */
+    /*
     private void loadUserFromPreferences() {
         int userId = sharedPreferences.getInt(Constants.KEY_USER_ID, 0);
         String userName = sharedPreferences.getString(Constants.KEY_USER_NAME, null);
         if (userId != 0 && userName != null) {
-            user = new LoggedInUser(userId, userName);
+            user = new User(userId, userName);
         }
-    }
+    }*/
 
     /**
      * Interfaccia per la gestione del risultato del login.
      */
     public interface LoginCallback {
-        void onSuccess(Result.Success<LoggedInUser> result);
+        void onSuccess(Result.Success<User> result);
         void onError(Result.Error error);
     }
 }

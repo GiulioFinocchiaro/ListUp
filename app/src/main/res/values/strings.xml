@@ -45,4 +45,6 @@
     <string name="date_card">Data di scadenza</string>
     <string name="cvv_card">CVV</string>
     <string name="numbers_card">Numero Carta</string>
+    <string name="nome_lista">Nome Lista</string>
+    <string name="proprietario">Proprietario</string>
 </resources>
