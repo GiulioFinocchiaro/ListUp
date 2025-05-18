@@ -6,7 +6,7 @@ import android.content.Context;
 import com.giuliofinocchiaro.listup.data.Constants;
 import com.giuliofinocchiaro.listup.data.Result;
 import com.giuliofinocchiaro.listup.data.model.User;
-import com.giuliofinocchiaro.listup.data.source.LoginDataSource;
+import com.giuliofinocchiaro.listup.data.source.auth.LoginDataSource;
 
 /**
  * Classe che gestisce l'autenticazione dell'utente e il salvataggio dei dati di sessione.
@@ -64,7 +64,7 @@ public class LoginRepository {
             @Override
             public void onSuccess(Result.Success<User> result) {
                 user = result.getData();
-                saveUserToPreferences(user);
+                //saveUserToPreferences(user);
                 callback.onSuccess(result);
             }
 
@@ -80,12 +80,12 @@ public class LoginRepository {
     /**
      * Salva l'utente nelle SharedPreferences.
      */
-    private void saveUserToPreferences(User user) {
+    /*private void saveUserToPreferences(User user) {
         sharedPreferences.edit()
                 .putInt(Constants.KEY_USER_ID, user.getUserId())
                 .putString(Constants.KEY_USER_NAME, user.getUsername())
                 .apply();
-    }
+    }*/
 
     /**
      * Carica i dati dell'utente loggato dalle SharedPreferences.

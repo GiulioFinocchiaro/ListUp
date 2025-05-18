@@ -18,8 +18,15 @@
     <color name="on_surface">#556B2F</color> <!-- Dark Olive (aggiunto per contrasto) -->
     <color name="white">#FFFFFF</color>
 
-    <color name="button">#006400</color> <!-- Dark Green -->
+    <color name="button">#015701</color> <!-- Dark Green -->
     <color name="button_text">#FFFFFF</color>
 
     <color name="red">#FF0000</color>
+
+    <color name="card_bg_normal">#FFFFFF</color>
+    <color name="card_bg_selected">#FFEB3B</color>  <!-- verde chiaro quando selezionato -->
+    <color name="card_stroke_normal">#A5D6A7</color>
+    <color name="card_stroke_selected">#388E3C</color>
+    <color name="icon_tint">#388E3C</color>
+    <color name="text_primary">#2E7D32</color>
 </resources>

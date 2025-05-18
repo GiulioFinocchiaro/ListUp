@@ -1,7 +1,5 @@
 package com.giuliofinocchiaro.listup.data.model;
 
-import androidx.annotation.NonNull;
-
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository
  */

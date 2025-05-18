@@ -1,4 +1,4 @@
-package com.giuliofinocchiaro.listup.data.source;
+package com.giuliofinocchiaro.listup.data.source.auth;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -45,6 +45,7 @@ public class LoginDataSource {
                     String response = scanner.useDelimiter("\\A").next();
                     JSONObject jsonResponse = new JSONObject(response);
 
+                    Log.d("Login", jsonResponse.toString());
 
                     if (jsonResponse.optBoolean("status", false)) {
                         JSONObject userJson = new JSONObject(jsonResponse.optString("user"));

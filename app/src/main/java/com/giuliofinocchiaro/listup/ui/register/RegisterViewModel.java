@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.giuliofinocchiaro.listup.R;
 import com.giuliofinocchiaro.listup.data.Result;
-import com.giuliofinocchiaro.listup.data.source.RegisterDataSource;
+import com.giuliofinocchiaro.listup.data.source.auth.RegisterDataSource;
 
 public class RegisterViewModel extends ViewModel {
     private final MutableLiveData<RegisterResult> registerResult = new MutableLiveData<>();

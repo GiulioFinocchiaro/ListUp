@@ -10,7 +10,7 @@ import com.giuliofinocchiaro.listup.R;
 import com.giuliofinocchiaro.listup.data.Result;
 import com.giuliofinocchiaro.listup.data.model.User;
 import com.giuliofinocchiaro.listup.data.repository.LoginRepository;
-import com.giuliofinocchiaro.listup.data.source.LoginDataSource;
+import com.giuliofinocchiaro.listup.data.source.auth.LoginDataSource;
 
 public class LoginViewModel extends ViewModel {
 

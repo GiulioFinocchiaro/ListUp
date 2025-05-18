@@ -1,4 +1,4 @@
-package com.giuliofinocchiaro.listup.data.source;
+package com.giuliofinocchiaro.listup.data.source.auth;
 
 import android.os.Handler;
 import android.os.Looper;

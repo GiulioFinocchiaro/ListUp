@@ -1,93 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:padding="16dp">
+    android:orientation="vertical"
+    android:padding="0dp">
 
-    <LinearLayout
+    <include
+        layout="@layout/toolbar_menu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content" />
 
-        <!-- Titolo principale -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_elenco_liste"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:gravity="center_horizontal"
-                android:text="📝 Elenco Liste"
-                android:textColor="#2E7D32"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <!-- Sezione: Liste Mie -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_elenco_liste"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center_horizontal"
+                    android:text="📝 Elenco Liste"
+                    android:textColor="#2E7D32"
+                    android:textColorLink="@color/primary"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_liste_mie"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:text="📂 Liste Mie"
-                    android:textColor="#388E3C"
+                    android:text="📂 Le mie Liste"
+                    android:textColor="@color/primary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
+                <LinearLayout
+                    android:id="@+id/ll_myLists_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <include
+                        layout="@layout/item_shopping_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
                 <Button
                     android:id="@+id/btn_aggiungi_lista"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_margin="10dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginBottom="12dp"
-                    android:backgroundTint="#66BB6A"
+                    android:backgroundTint="@color/primary"
                     android:text="➕ Aggiungi Lista"
                     android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/tv_liste_condivise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="🤝 Condivise con Me"
+                    android:textColor="#388E3C"
+                    android:textColorLink="@color/primary"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/ll_guestList_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <include
+                        layout="@layout/item_shopping_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
+    </ScrollView>
 
-        <!-- Bottone aggiunta -->
-
-        <!-- Container RecyclerView/Lista delle tue liste -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_liste_mie"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp" />
-
-        <!-- Sezione: Liste Condivise -->
-        <TextView
-            android:id="@+id/tv_liste_condivise"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="🤝 Condivise con Me"
-            android:textColor="#388E3C"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <!-- Container RecyclerView/Lista condivisa -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_liste_condivise"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>

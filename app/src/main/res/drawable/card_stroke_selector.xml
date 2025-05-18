@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- stato selezionato -->
+    <item android:state_checked="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <stroke
+                android:width="2dp"
+                android:color="@color/card_stroke_selected" />
+            <corners android:radius="16dp" />
+        </shape>
+    </item>
+    <!-- stato normale -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <stroke
+                android:width="2dp"
+                android:color="@color/card_stroke_normal" />
+            <corners android:radius="16dp" />
+        </shape>
+    </item>
+</selector>
