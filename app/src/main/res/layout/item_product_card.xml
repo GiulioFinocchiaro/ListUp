@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_product"
-    android:layout_width="0dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:checkable="true"
+    android:clickable="true"
+    android:focusable="true"
     android:minWidth="120dp"
     android:minHeight="160dp"
+    app:cardBackgroundColor="@color/card_bg_default"
     app:cardCornerRadius="16dp"
     app:cardElevation="4dp"
     app:cardUseCompatPadding="true"
-    app:strokeWidth="2dp"
     app:strokeColor="@color/card_stroke_default"
-    app:cardBackgroundColor="@color/card_bg_default"
-    android:clickable="true"
-    android:focusable="true"
-    android:checkable="true"
-    >
+    app:strokeWidth="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -76,7 +76,7 @@ public class CategoryActivity extends AppCompatActivity {
             btn.setOnClickListener(v -> {
                 showCodeDialog(list.getCode());
             });
-        } btn.setVisibility(View.GONE);
+        } else btn.setVisibility(View.GONE);
 
         linearLayoutCategories = findViewById(R.id.ll_category_container);
         categoryViewModel.getMutableLiveDataCategories().observe(this, this::populateCategories);
