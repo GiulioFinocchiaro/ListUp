@@ -47,4 +47,6 @@
     <string name="numbers_card">Numero Carta</string>
     <string name="nome_lista">Nome Lista</string>
     <string name="proprietario">Proprietario</string>
+    <string name="scegli_i_prodotti">🛒 Scegli i prodotti</string>
+    <string name="prodotto_icon">Icon</string>
 </resources>

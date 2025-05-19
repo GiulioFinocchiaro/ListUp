@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,6 +20,8 @@ import com.giuliofinocchiaro.listup.data.Constants;
 import com.giuliofinocchiaro.listup.data.Result;
 import com.giuliofinocchiaro.listup.data.model.Category;
 import com.giuliofinocchiaro.listup.data.model.ListShop;
+import com.giuliofinocchiaro.listup.data.model.Product;
+import com.giuliofinocchiaro.listup.data.model.ProductSelected;
 import com.giuliofinocchiaro.listup.ui.product.ProductActivity;
 import com.google.android.material.card.MaterialCardView;
 import com.squareup.picasso.Callback;
@@ -30,6 +33,7 @@ public class CategoryActivity extends AppCompatActivity {
     private int id_list;
     private CategoryViewModel categoryViewModel;
     private LinearLayout linearLayoutCategories;
+    private LinearLayout ll_containers;
     private ListShop list;
 
     @Override
@@ -54,13 +58,16 @@ public class CategoryActivity extends AppCompatActivity {
         }
 
         list = categoryViewModel.getList();
+        ll_containers = findViewById(R.id.ll_productsSelected_container);
 
         TextView list_name = findViewById(R.id.lv_name_list_category);
         list_name.setText(list.getTitle());
 
         linearLayoutCategories = findViewById(R.id.ll_category_container);
-        categoryViewModel.loadCategories();
         categoryViewModel.getMutableLiveDataCategories().observe(this, this::populateCategories);
+        categoryViewModel.loadCategories();
+        categoryViewModel.getMutableLiveDataProductsSelected().observe(this, this::displayProducts);
+        categoryViewModel.loadProductsSelected();
     }
 
     private void populateCategories(ArrayList<Category> categories) {
@@ -81,13 +88,66 @@ public class CategoryActivity extends AppCompatActivity {
 
 
             card.setOnClickListener(v -> {
-                Intent data = new Intent(this, ProductActivity.class);
-                data.putExtra("id_category", cat.getId());
-                data.putExtra("id_list", list.getId());
-                startActivity(data);
+                Intent i = new Intent(this, ProductActivity.class);
+                i.putExtra("id_list", list.getId());
+                i.putExtra("id_category", cat.getId());
+                startActivity(i);
             });
 
             linearLayoutCategories.addView(card);
+        }
+    }
+
+    private void displayProducts(ArrayList<ProductSelected> products) {
+        if (products.isEmpty()) findViewById(R.id.ll_products_in_lista).setVisibility(View.GONE);
+        ll_containers.removeAllViews();
+        LayoutInflater inf = LayoutInflater.from(this);
+
+        for (int i = 0; i < products.size(); i += 3) {
+            LinearLayout row = new LinearLayout(this);
+            row.setOrientation(LinearLayout.HORIZONTAL);
+            LinearLayout.LayoutParams rp = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            rp.setMargins(0, 8, 0, 8);
+            row.setLayoutParams(rp);
+
+            for (int j = i; j < i + 3 && j < products.size(); j++) {
+                View card = inf.inflate(R.layout.item_product_card, row, false);
+                card.setClickable(true);
+                card.setFocusable(true);
+                card.setSelected(false);
+
+                ImageView iv = card.findViewById(R.id.iv_product_icon);
+                TextView tv = card.findViewById(R.id.tv_product_name);
+                loadImage(iv, products.get(j).getIcon());
+                tv.setText(products.get(j).getName());
+
+                LinearLayout.LayoutParams cardLp = new LinearLayout.LayoutParams(
+                        0,
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        1f
+                );
+                cardLp.setMargins(8, 0, 8, 0);
+                card.setLayoutParams(cardLp);
+
+                MaterialCardView mcv = card.findViewById(R.id.card_product);
+                mcv.setCheckable(true);
+                mcv.setChecked(true);
+                if (list.isCanEdit()){
+                    int finalJ = j;
+                    mcv.setOnClickListener(v -> {
+                        boolean newChecked = !mcv.isChecked();
+                        if (!newChecked) {
+                            categoryViewModel.removePorduct(products.get(finalJ));
+                        }
+                        mcv.setChecked(newChecked);
+
+                    });
+                }
+
+                row.addView(card);
+            }
+            ll_containers.addView(row);
         }
     }
 

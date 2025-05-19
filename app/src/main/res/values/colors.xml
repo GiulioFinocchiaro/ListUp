@@ -23,10 +23,12 @@
 
     <color name="red">#FF0000</color>
 
-    <color name="card_bg_normal">#FFFFFF</color>
-    <color name="card_bg_selected">#FFEB3B</color>  <!-- verde chiaro quando selezionato -->
-    <color name="card_stroke_normal">#A5D6A7</color>
+    <color name="card_bg_default">#FFFFFF</color>
+    <color name="card_bg_selected">#E0F2F1</color>
     <color name="card_stroke_selected">#388E3C</color>
+    <color name="card_bg_checked">#E8F5E9</color>   <!-- verde chiaro -->
+    <color name="card_stroke_default">#A5D6A7</color>
+    <color name="card_stroke_checked">#388E3C</color> <!-- verde scuro -->
     <color name="icon_tint">#388E3C</color>
     <color name="text_primary">#2E7D32</color>
 </resources>

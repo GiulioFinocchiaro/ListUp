@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usernameRegisterLayout"
+        style="@style/CustomTextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:outlineAmbientShadowColor="@color/primary"
+        android:outlineSpotShadowColor="@color/primary"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/primary"
+        app:boxStrokeWidth="2dp"
+        app:endIconDrawable="@drawable/ic_launcher_foreground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_nome_lista"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Titolo lista"
+            android:outlineAmbientShadowColor="@color/primary"
+            android:textColor="@color/primary"
+            android:textColorHighlight="@color/primary"
+            android:textColorHint="@color/on_background" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>

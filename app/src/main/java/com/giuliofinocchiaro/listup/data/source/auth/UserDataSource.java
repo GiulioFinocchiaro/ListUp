@@ -33,7 +33,7 @@ public class UserDataSource {
                 conn.setRequestProperty("Content-Type", "application/json");
                 conn.setDoOutput(true);
                 JSONObject json = new JSONObject();
-                json.put("userId", id);
+                json.put("idUser", id);
 
                 try (OutputStream os = conn.getOutputStream()) {
                     os.write(json.toString().getBytes(StandardCharsets.UTF_8));
@@ -46,7 +46,7 @@ public class UserDataSource {
 
 
                     if (jsonResponse.optBoolean("status", false)) {
-                        JSONObject userJson = new JSONObject(jsonResponse.optString("user"));
+                        JSONObject userJson = new JSONObject(jsonResponse.optString("message"));
 
                         User user = new User(
                                 userJson.optInt("id"),

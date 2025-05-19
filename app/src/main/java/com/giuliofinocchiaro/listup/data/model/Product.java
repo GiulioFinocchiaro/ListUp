@@ -1,8 +1,5 @@
 package com.giuliofinocchiaro.listup.data.model;
 
-import com.giuliofinocchiaro.listup.data.repository.CategoryRepository;
-import com.giuliofinocchiaro.listup.data.source.CategoryDataSource;
-
 public class Product {
     private int id;
     private String name;
@@ -18,6 +15,15 @@ public class Product {
         this.unit = unit;
         this.is_available = is_available;
         this.icon = icon;
+    }
+
+    public Product(Product product) {
+        this.id = product.getId();
+        this.icon = product.getIcon();
+        this.name = product.getName();
+        this.unit = product.getUnit();
+        this.category = product.getCategory();
+        this.is_available = product.isIs_available();
     }
 
     public int getId() {

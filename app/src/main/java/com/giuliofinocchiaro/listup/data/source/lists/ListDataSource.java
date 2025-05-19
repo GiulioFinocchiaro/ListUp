@@ -69,7 +69,7 @@ public class ListDataSource {
                                     userLogged,
                                     list.optString("title"),
                                     list.optString("code"),
-                                    list.optInt("canEdit") == 1  // int → boolean
+                                    list.optInt("canEdit") == 1
                             ));
                         }
 
@@ -129,7 +129,6 @@ public class ListDataSource {
                             return;
                         }
 
-                        // Contatore per callback una sola volta
                         final int total = jsonArray.length();
                         final int[] processed = {0};
 
@@ -141,6 +140,7 @@ public class ListDataSource {
                                 @Override
                                 public void onSuccess(Result.Success<User> result) {
                                     User owner = result.getData();
+                                    Log.d("User Owner", owner.toString());
                                     ListShop listShop = new ListShop(
                                             list.optInt("id"),
                                             owner,
@@ -190,6 +190,60 @@ public class ListDataSource {
                 );
             }
         });
+    }
+
+    public void getAddList(String title, int id_user, ListAddCallback callback){
+        executor.execute(() -> {
+            try {
+                Log.d("List", "Dentro");
+                URL url = new URL(Constants.urlAPI + "lists/postList.php");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Type", "application/json");
+                conn.setDoOutput(true);
+
+                // Costruisco il JSON
+                JSONObject json = new JSONObject();
+                json.put("id_user", id_user);
+                json.put("title", title);
+
+                // Invio i dati
+                try (OutputStream os = conn.getOutputStream()) {
+                    os.write(json.toString().getBytes(StandardCharsets.UTF_8));
+                }
+
+                int responseCode = conn.getResponseCode();
+                try (Scanner scanner = new Scanner(
+                        responseCode == 200 ? conn.getInputStream() : conn.getErrorStream()
+                )) {
+                    String response = scanner.useDelimiter("\\A").next();
+                    JSONObject jsonResponse = new JSONObject(response);
+
+                    Log.d("List", jsonResponse.toString());
+
+                    if (jsonResponse.optBoolean("status", false)) {
+
+                        mainHandler.post(() ->
+                                callback.onSuccess(new Result.Success<>(true))
+                        );
+                    } else {
+                        String errorMessage = jsonResponse.optString("message", "Errore sconosciuto");
+                        mainHandler.post(() ->
+                                callback.onError(new Result.Error(new Exception(errorMessage)))
+                        );
+                    }
+                }
+            } catch (Exception e) {
+                mainHandler.post(() ->
+                        callback.onError(new Result.Error(new IOException("Error get lists in", e)))
+                );
+            }
+        });
+    }
+
+    public interface ListAddCallback{
+        void onSuccess(Result.Success<Boolean> result);
+        void onError(Result.Error error);
     }
 
     public interface ListCallback{

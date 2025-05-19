@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,6 +17,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.giuliofinocchiaro.listup.R;
 import com.giuliofinocchiaro.listup.data.model.ListShop;
 import com.giuliofinocchiaro.listup.ui.category.CategoryActivity;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 
@@ -40,19 +44,19 @@ public class HomeActivity extends AppCompatActivity {
             displayLists(ll_guestLists, lists);
         });
         homeViewModel.loadListsForGuest();
+        Button btn = findViewById(R.id.btn_aggiungi_lista);
+        btn.setOnClickListener(v -> showAddDialog());
     }
 
     @SuppressLint("SetTextI18n")
     private void displayLists(LinearLayout ll, ArrayList<ListShop> lists){
         ll.removeAllViews();
-        // se vuoto, non mostrarmi il contenitore
         ll.setVisibility((lists == null || lists.isEmpty()) ? View.GONE : View.VISIBLE);
 
         if (lists != null) {
             LayoutInflater inflater = LayoutInflater.from(this);
 
             for (ListShop list : lists) {
-                // infliamo la nostra card
                 View itemView = inflater.inflate(R.layout.item_shopping_list, ll, false);
 
                 TextView tvName = itemView.findViewById(R.id.tv_list);
@@ -69,5 +73,30 @@ public class HomeActivity extends AppCompatActivity {
                 ll.addView(itemView);
             }
         }
+    }
+
+    private void showAddDialog() {
+        View dialogView = LayoutInflater.from(this)
+                .inflate(R.layout.dialog_add_product, null);
+
+        TextInputEditText etTitle = dialogView.findViewById(R.id.et_nome_lista);
+
+        new MaterialAlertDialogBuilder(this)
+                .setTitle("Aggiungi Lista")
+                .setView(dialogView)
+                .setNegativeButton("Annulla", (dialog, which) -> dialog.dismiss())
+                .setPositiveButton("OK", (dialog, which) -> {
+                    String title = etTitle.getText() != null
+                            ? etTitle.getText().toString().trim()
+                            : "";
+
+                    if (!title.isEmpty()) {
+                        homeViewModel.addListWithTitle(title);
+                        homeViewModel.loadListsForGuest();
+                        homeViewModel.loadListsForOwner();
+                    }
+                    dialog.dismiss();
+                })
+                .show();
     }
 }

@@ -85,4 +85,24 @@ public class HomeViewModel extends AndroidViewModel {
     public User getUserLogged(){
         return loginRepository.getUser();
     }
+
+    public void addListWithTitle(String title) {
+        listRepository.addList(title, new ListDataSource.ListAddCallback() {
+            @Override
+            public void onSuccess(Result.Success<Boolean> result) {
+                loadListsForOwner();
+                loadListsForGuest();
+            }
+
+            @Override
+            public void onError(Result.Error error) {
+                Log.e("Home", "Error loading guest lists added", error.getError());
+                Toast.makeText(
+                        getApplication(),
+                        "Errore caricamento lista aggiunta: " + error.getError().getMessage(),
+                        Toast.LENGTH_SHORT
+                ).show();
+            }
+        });
+    }
 }

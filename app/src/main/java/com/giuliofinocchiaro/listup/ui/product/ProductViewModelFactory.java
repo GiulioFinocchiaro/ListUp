@@ -5,7 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-public class ProductViewModelFactory extends ViewModelProvider.AndroidViewModelFactory {
+public class ProductViewModelFactory implements ViewModelProvider.Factory {
     private Application application;
     private int idList;
     private int idCategory;

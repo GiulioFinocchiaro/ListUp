@@ -1,4 +1,4 @@
-package com.giuliofinocchiaro.listup.data.source;
+package com.giuliofinocchiaro.listup.data.source.products;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.giuliofinocchiaro.listup.data.Constants;
 import com.giuliofinocchiaro.listup.data.Result;
-import com.giuliofinocchiaro.listup.data.model.Category;
 import com.giuliofinocchiaro.listup.data.model.Product;
 import com.giuliofinocchiaro.listup.data.repository.CategoryRepository;
 

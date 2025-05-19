@@ -5,7 +5,7 @@ import android.content.Context;
 import com.giuliofinocchiaro.listup.data.Result;
 import com.giuliofinocchiaro.listup.data.model.Product;
 import com.giuliofinocchiaro.listup.data.source.CategoryDataSource;
-import com.giuliofinocchiaro.listup.data.source.ProductDataSource;
+import com.giuliofinocchiaro.listup.data.source.products.ProductDataSource;
 
 import java.util.ArrayList;
 
@@ -48,5 +48,12 @@ public class ProductRepository {
             if (product.getCategory().getId() == id) productsCate.add(product);
         }
         return productsCate;
+    }
+
+    public Product getProductById(int id){
+        for (Product product : products){
+            if (product.getId() == id) return product;
+        }
+        return null;
     }
 }

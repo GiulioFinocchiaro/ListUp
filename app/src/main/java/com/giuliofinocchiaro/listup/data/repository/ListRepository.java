@@ -71,4 +71,17 @@ public class ListRepository {
         return null;
     }
 
+    public void addList(String title, ListDataSource.ListAddCallback callback){
+        listDataSource.getAddList(title, LoginRepository.getInstance(new LoginDataSource(), context).getUser().getUserId(), new ListDataSource.ListAddCallback() {
+            @Override
+            public void onSuccess(Result.Success<Boolean> result) {
+
+            }
+
+            @Override
+            public void onError(Result.Error error) {
+
+            }
+        });
+    }
 }
