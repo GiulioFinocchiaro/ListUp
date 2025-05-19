@@ -1,16 +1,22 @@
 package com.giuliofinocchiaro.listup.ui.category;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
@@ -23,7 +29,9 @@ import com.giuliofinocchiaro.listup.data.model.ListShop;
 import com.giuliofinocchiaro.listup.data.model.Product;
 import com.giuliofinocchiaro.listup.data.model.ProductSelected;
 import com.giuliofinocchiaro.listup.ui.product.ProductActivity;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -62,6 +70,13 @@ public class CategoryActivity extends AppCompatActivity {
 
         TextView list_name = findViewById(R.id.lv_name_list_category);
         list_name.setText(list.getTitle());
+
+        ImageView btn = findViewById(R.id.btn_list_settings);
+        if (list.getOwner().getUserId() == categoryViewModel.getUser().getUserId()){
+            btn.setOnClickListener(v -> {
+                showCodeDialog(list.getCode());
+            });
+        } btn.setVisibility(View.GONE);
 
         linearLayoutCategories = findViewById(R.id.ll_category_container);
         categoryViewModel.getMutableLiveDataCategories().observe(this, this::populateCategories);
@@ -169,5 +184,39 @@ public class CategoryActivity extends AppCompatActivity {
                 iv.setImageResource(R.mipmap.ic_launcher);
             }
         });
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void showCodeDialog(String codeText) {
+        View dialogView = LayoutInflater.from(this)
+                .inflate(R.layout.dialog_show_code, null);
+
+        TextView tvCode   = dialogView.findViewById(R.id.tv_code);
+        Button btnCopy    = dialogView.findViewById(R.id.btn_copy);
+        Button btnClose   = dialogView.findViewById(R.id.btn_close);
+
+        tvCode.setText(Constants.urlAPI+"lists/sharedList.php?code="+codeText);
+
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
+                .setTitle("Codice sorgente")
+                .setView(dialogView);
+
+        AlertDialog dialog = builder.show();
+
+        btnCopy.setOnClickListener(v -> {
+            ClipboardManager clipboard =
+                    (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("codice", tvCode.getText());
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(this, "Codice copiato negli appunti", Toast.LENGTH_SHORT).show();
+        });
+
+        btnClose.setOnClickListener(v -> dialog.dismiss());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        categoryViewModel.loadProductsSelected();
     }
 }

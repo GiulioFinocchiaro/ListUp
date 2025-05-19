@@ -129,7 +129,7 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     private void loadImage(ImageView iv, String URL){
-        String fullURL = Constants.urlCDN + URL + ".png?t=" + System.currentTimeMillis();
+        String fullURL = Constants.urlCDN + URL + "?t=" + System.currentTimeMillis();
 
         if (URL == null || URL.isEmpty()){
             iv.setImageResource(R.mipmap.ic_launcher);
